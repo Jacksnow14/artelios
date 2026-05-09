@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Artelios — AI-Powered Etsy Shop Management</title>
+  <meta name="description" content="Artelios helps Etsy sellers manage their shops more efficiently with AI-assisted product listing tools and shop analytics.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --orange: #F56400;
+      --orange-light: #FF8C40;
+      --dark: #1a1a1a;
+      --gray: #555;
+      --light-gray: #f5f5f5;
+      --white: #ffffff;
+      --border: #e0e0e0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    a { color: var(--orange); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* NAV */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--orange);
+      letter-spacing: -0.5px;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { color: var(--gray); font-size: 0.95rem; }
+    .nav-links a:hover { color: var(--orange); text-decoration: none; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #fff8f4 0%, #fff3ec 100%);
+      padding: 5rem 2rem 4rem;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+      color: var(--dark);
+    }
+    .hero h1 span { color: var(--orange); }
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--gray);
+      max-width: 600px;
+      margin: 0 auto 2rem;
+    }
+    .badge {
+      display: inline-block;
+      background: #fff3ec;
+      border: 1px solid #ffd4b3;
+      color: var(--orange);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--orange);
+      color: var(--white);
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.9rem 2.2rem;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .btn:hover { background: var(--orange-light); text-decoration: none; }
+    .btn-outline {
+      background: transparent;
+      border: 2px solid var(--orange);
+      color: var(--orange);
+      margin-left: 1rem;
+    }
+    .btn-outline:hover { background: #fff3ec; }
+
+    /* FEATURES */
+    .section { padding: 4rem 2rem; max-width: 1100px; margin: 0 auto; }
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 0.75rem;
+    }
+    .section-sub {
+      text-align: center;
+      color: var(--gray);
+      font-size: 1.05rem;
+      margin-bottom: 3rem;
+    }
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+    .feature-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+    }
+    .feature-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+    .feature-card h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .feature-card p { color: var(--gray); font-size: 0.95rem; }
+
+    /* HOW IT WORKS */
+    .how-section { background: var(--light-gray); padding: 4rem 2rem; }
+    .steps { max-width: 800px; margin: 0 auto; }
+    .step {
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      margin-bottom: 2rem;
+    }
+    .step-num {
+      flex-shrink: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      background: var(--orange);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .step h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.3rem; }
+    .step p { color: var(--gray); font-size: 0.95rem; }
+
+    /* USE CASES */
+    .use-cases {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .use-case {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      text-align: center;
+      font-size: 0.95rem;
+    }
+    .use-case strong { display: block; margin-top: 0.5rem; font-size: 0.9rem; color: var(--gray); }
+
+    /* CTA */
+    .cta-section {
+      background: var(--orange);
+      padding: 4rem 2rem;
+      text-align: center;
+      color: var(--white);
+    }
+    .cta-section h2 { font-size: 2rem; font-weight: 800; margin-bottom: 0.75rem; }
+    .cta-section p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 2rem; }
+    .btn-white {
+      background: var(--white);
+      color: var(--orange);
+      border: none;
+    }
+    .btn-white:hover { background: #f5f5f5; color: var(--orange); }
+
+    /* FOOTER */
+    footer {
+      background: var(--dark);
+      color: #aaa;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.875rem;
+    }
+    footer a { color: #ccc; }
+    footer .footer-links { display: flex; justify-content: center; gap: 1.5rem; margin-bottom: 1rem; }
+
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .btn-outline { margin-left: 0; margin-top: 0.75rem; display: block; }
+      .step { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="logo">Artelios</div>
+  <ul class="nav-links">
+    <li><a href="#features">Features</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="badge">Etsy Seller Tool</div>
+  <h1>Smart Listing Management<br>for Your <span>Etsy Shop</span></h1>
+  <p>Artelios helps Etsy sellers create, manage, and optimize product listings using AI-powered tools — saving hours of manual work every week.</p>
+  <a href="#contact" class="btn">Get Early Access</a>
+  <a href="#features" class="btn btn-outline">Learn More</a>
+</section>
+
+<!-- FEATURES -->
+<div class="section" id="features">
+  <p class="section-title">Everything your shop needs</p>
+  <p class="section-sub">Artelios connects to your Etsy shop via the official Etsy API to manage your listings smarter.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🖼️</div>
+      <h3>AI Product Images</h3>
+      <p>Generate professional product visuals for your Etsy listings using AI image generation — no photo studio required.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📝</div>
+      <h3>Listing Management</h3>
+      <p>Create, update, and renew listings via the Etsy API. Bulk operations let you manage your entire catalog efficiently.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📊</div>
+      <h3>Shop Analytics</h3>
+      <p>Track listing performance, views, and sales in a clean dashboard. Understand which products are driving growth.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔄</div>
+      <h3>Auto-Renewal</h3>
+      <p>Never let a listing expire. Artelios automatically renews active listings based on your shop rules and preferences.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💰</div>
+      <h3>Spend Tracking</h3>
+      <p>Monitor your Etsy ad spend and API usage costs with built-in budget caps so you stay in control.</p>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🛡️</div>
+      <h3>Compliance Built In</h3>
+      <p>AI-generated content is clearly disclosed in every listing description, keeping your shop compliant with Etsy's policies.</p>
+    </div>
+  </div>
+</div>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="how">
+  <div class="section">
+    <p class="section-title">How Artelios Works</p>
+    <p class="section-sub">A simple, transparent workflow that respects your shop and Etsy's platform rules.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div>
+          <h4>Connect your Etsy shop</h4>
+          <p>Authorize Artelios via the official Etsy OAuth flow. We request only the permissions needed (listings read/write). No password sharing.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div>
+          <h4>Set up your product catalog</h4>
+          <p>Upload your product details or import from your existing Etsy shop. Artelios generates titles, descriptions, and images using AI.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div>
+          <h4>Publish and manage listings</h4>
+          <p>Artelios creates listings on Etsy via the official API. Every listing clearly discloses AI-generated content per Etsy's seller policies.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div>
+          <h4>Track performance</h4>
+          <p>Monitor views, favorites, and sales. Artelios surfaces actionable insights to help you improve your shop over time.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<div class="section">
+  <p class="section-title">Built for Etsy sellers</p>
+  <p class="section-sub">Whether you're just starting out or scaling an established shop, Artelios fits your workflow.</p>
+  <div class="use-cases">
+    <div class="use-case">🎨 <strong>Digital Art Sellers</strong></div>
+    <div class="use-case">✂️ <strong>Handmade Crafters</strong></div>
+    <div class="use-case">📦 <strong>POD Sellers</strong></div>
+    <div class="use-case">🖼️ <strong>Print Shops</strong></div>
+    <div class="use-case">💎 <strong>Jewelry Makers</strong></div>
+    <div class="use-case">🏡 <strong>Home Décor</strong></div>
+  </div>
+</div>
+
+<!-- CTA -->
+<section class="cta-section" id="contact">
+  <h2>Ready to grow your Etsy shop?</h2>
+  <p>Join the waitlist and be first to try Artelios when we launch.</p>
+  <a href="mailto:hello@artelios.art" class="btn btn-white">Contact Us</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="mailto:hello@artelios.art">hello@artelios.art</a>
+  </div>
+  <p>&copy; 2026 Artelios. All rights reserved.<br>
+  Artelios is an independent application and is not affiliated with or endorsed by Etsy, Inc.<br>
+  Etsy is a trademark of Etsy, Inc.</p>
+</footer>
+
+</body>
+</html>
